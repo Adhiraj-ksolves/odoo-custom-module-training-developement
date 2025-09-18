@@ -1,0 +1,108 @@
+<odoo>
+    <data>
+
+        <record id="action_school_class" model="ir.actions.act_window">
+            <field name="name">Classes</field>
+            <field name="res_model">school.management.clas</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="type">ir.actions.act_window</field>
+        </record>
+
+
+        <record id="view_school_class_list" model="ir.ui.view">
+            <field name="name">school.class.list</field>
+            <field name="model">school.management.clas</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="section"/>
+                    <field name="teacher_ids"/>
+                </list>
+            </field>
+        </record>
+
+
+        <record id="view_class_kanban" model="ir.ui.view">
+            <field name="name">school.management.class.kanban</field>
+            <field name="model">school.management.clas</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="section"/>
+                    <field name="teacher_ids"/>
+                    <field name="student_ids"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record">
+                                <strong>Class:</strong>
+                                <field name="name"/>
+                                <br/>
+                                <strong>Section:</strong>
+                                <field name="section"/>
+                                <br/>
+                                <strong>Teacher:</strong>
+                                <field name="teacher_ids"/>
+                                <br/>
+                                <strong>Total Student:</strong>
+                                <field name="student_ids"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_student_kanban" model="ir.ui.view">
+            <field name="name">school.management.student.kanban</field>
+            <field name="model">school.management.student</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="roll_no"/>
+                    <field name="teacher_ids"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record">
+                                <strong>Name:</strong>
+                                <field name="name"/>
+                                <br/>
+                                <strong>Roll No:</strong>
+                                <field name="roll_no"/>
+                                <br/>
+                                <strong>Teacher:</strong>
+                                <field name="teacher_ids"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_school_class_form" model="ir.ui.view">
+            <field name="name">school.class.form</field>
+            <field name="model">school.management.clas</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="section"/>
+                            <field name="teacher_ids"/>
+                        </group>
+
+
+                        <notebook>
+                            <page string="Students">
+                                <field name="student_ids" mode="kanban"
+                                       options="{'kanban_view_ref': 'student.management.view_student_kanban'}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

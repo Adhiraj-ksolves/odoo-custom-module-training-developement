@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+
+
+        <record id="action_school_teacher" model="ir.actions.act_window">
+            <field name="name">Teachers</field>
+            <field name="res_model">school.management.teacher</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="type">ir.actions.act_window</field>
+        </record>
+
+
+        <record id="view_teacher_list" model="ir.ui.view">
+            <field name="name">school.management.teacher.list</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="subject_ids" widget="many2many_tags"/>
+                    <field name="phone_no"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                </list>
+            </field>
+        </record>
+
+
+        <record id="view_teacher_kanban" model="ir.ui.view">
+            <field name="name">school.management.teacher.kanban</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="subject_ids"/>
+                    <field name="phone_no"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="student_ids"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record">
+                                <strong>Name:</strong>
+                                <field name="name"/>
+                                <br/>
+                                <strong>Subject:</strong>
+                                <field name="subject_ids"/>
+                                <br/>
+                                <strong>Phone No:</strong>
+                                <field name="phone_no"/>
+                                <br/>
+                                <strong>Age:</strong>
+                                <field name="age"/>
+                                <br/>
+                                <strong>Gender:</strong>
+                                <field name="gender"/>
+                                <br/>
+                                <strong>No. of Students:</strong>
+                                <field name="student_ids"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_teacher_form" model="ir.ui.view">
+            <field name="name">school.management.teacher.form</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="subject_ids" widget="many2many_tags"/>
+                            <field name="phone_no"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="user_id"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Students">
+                                <field name="student_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="roll_no"/>
+                                        <field name="age"/>
+                                        <field name="gender"/>
+                                        <field name="section"/>
+                                        <field name="subject_ids" widget="many2many_tags"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
