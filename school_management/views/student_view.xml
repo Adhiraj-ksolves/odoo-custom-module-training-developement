@@ -13,8 +13,11 @@
             <field name="name">school.management.student.list</field>
             <field name="model">school.management.student</field>
             <field name="arch" type="xml">
-                <list>
+                <list decoration-danger="state == 'on_leave'" decoration-info="state == 'sick'"
+                      decoration-success="state =='active'">
+                    <field name="sequence" widget="handle"/>
                     <field name="unique_student"/>
+                    <field name="state"/>
                     <field name="name"/>
                     <field name="age"/>
                     <field name="roll_no"/>
@@ -24,6 +27,7 @@
                     <field name="teacher_ids"/>
                     <field name="subject_ids"/>
                     <field name="class_id"/>
+                    <field name="sick_reason"/>
                 </list>
             </field>
         </record>
@@ -35,21 +39,29 @@
                 <kanban>
                     <field name="name"/>
                     <field name="roll_no"/>
+                    <field name="state"/>
+                    <field name="state_color"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_kanban_record">
-                                <strong>Name:</strong>
-                                <field name="name"/>
-                                <strong>Roll No:</strong>
-                                <field name="roll_no"/>
-                                <strong>Section:</strong>
-                                <field name="section"/>
-                                <strong>Gender:</strong>
-                                <field name="gender"/>
-                                <strong>Teacher:</strong>
-                                <field name="teacher_ids"/>
-                                <strong>Subject:</strong>
-                                <field name="subject_ids"/>
+                                <div t-if="record.state.value"
+                                     t-att-class="'o_status_bubble o_color_bubble_' + record.state_color.value"
+                                     style="position:absolute; top:5px; right:5px; width:12px; height:12px; border-radius:50%;"
+                                     t-att-title="record.state.value"/>
+                                <span>
+                                    <strong>Name: </strong>
+                                    <field name="name"/>
+                                </span>
+                                <br/>
+                                <span>
+                                    <strong>Roll No: </strong>
+                                    <field name="roll_no"/>
+                                </span>
+                                <br/>
+                                <span>
+                                    <strong>Status: </strong>
+                                    <field name="state"/>
+                                </span>
                             </div>
                         </t>
                     </templates>
@@ -57,11 +69,23 @@
             </field>
         </record>
 
+
         <record id="view_student_form" model="ir.ui.view">
             <field name="name">school.management.student.form</field>
             <field name="model">school.management.student</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="action_set_active" type="object" string="Set Active" invisible="state != 'sick' and state != 'on_leave'"
+                                class="oe_highlight"/>
+                        <button name="action_set_on_leave" type="object" string="Mark on leave"
+                                invisible="state != 'active' and state != 'sick'" class="oe_highlight"/>
+                        <button name="action_set_sick" type="object" string="Mark Sick" invisible="state == 'sick' and state !='on_leave' or state =='on_leave'" class="oe_highlight"/>
+                        <button name="%(action_sick_reason_wizard)d" type="action" string="Fill Sick Reason" invisible="state =='on_leave'" class="btn-primary"/>
+                        <button name="%(action_fill_exam_form)d" type="action" string="Fill Student Result Form"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="active,on_leave,sick"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -79,6 +103,18 @@
                                 <field name="class_id"/>
                             </group>
                         </group>
+                         <notebook>
+                            <page string="Result">
+                                <field name="exam_result_ids">
+                                    <list editable="bottom">
+<!--                                        <field name="name"/>-->
+                                        <field name="subject_id"/>
+                                        <field name="marks"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+
                     </sheet>
                 </form>
             </field>

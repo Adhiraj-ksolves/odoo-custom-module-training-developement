@@ -1,0 +1,27 @@
+<odoo>
+
+    <record id="action_fill_exam_form" model="ir.actions.act_window">
+        <field name="name">Fill Exam Result</field>
+        <field name="res_model">student.fill.exam.form.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_fill_exam_form_wizard" model="ir.ui.view">
+        <field name="name">student.fill.exam.form.wizard.form</field>
+        <field name="model">student.fill.exam.form.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fill Exam Result">
+                <group>
+                    <field name="student_id" invisible="1"/>
+                    <field name="subject_id"/>
+                    <field name="marks"/>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

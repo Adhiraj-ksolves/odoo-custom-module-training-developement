@@ -12,6 +12,8 @@
         'security/ir.model.access.csv',
         'security/security_access_data.xml',
         'Data/sequence_generator.xml',
+        'views/sick_reason_wizard_view.xml',
+        'views/fill_exam_form_wizard_view.xml',
         'views/student_view.xml',
         'views/teacher_view.xml',
         'views/class_view.xml',

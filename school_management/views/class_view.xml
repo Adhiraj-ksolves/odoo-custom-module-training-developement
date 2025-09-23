@@ -53,31 +53,7 @@
         </record>
 
 
-        <record id="view_student_kanban" model="ir.ui.view">
-            <field name="name">school.management.student.kanban</field>
-            <field name="model">school.management.student</field>
-            <field name="arch" type="xml">
-                <kanban>
-                    <field name="name"/>
-                    <field name="roll_no"/>
-                    <field name="teacher_ids"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click o_kanban_record">
-                                <strong>Name:</strong>
-                                <field name="name"/>
-                                <br/>
-                                <strong>Roll No:</strong>
-                                <field name="roll_no"/>
-                                <br/>
-                                <strong>Teacher:</strong>
-                                <field name="teacher_ids"/>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+
 
 
         <record id="view_school_class_form" model="ir.ui.view">

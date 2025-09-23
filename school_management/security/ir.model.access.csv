@@ -4,3 +4,6 @@ access_school_teacher,access_school_teacher,model_school_management_teacher,,1,1
 access_school_fees,access_school_fees,model_school_management_fees,,1,1,1,0
 access_school_class,access_school_class,model_school_management_clas,,1,1,1,1
 access_school_subject,access_school_subject,model_school_management_subject,,1,1,1,0
+access_student_sick_reason_wizard,access_student_sick_reason_wizard,model_student_sick_reason_wizard,base.group_user,1,1,1,1
+access_student_fill_exam_form_wizard,access_student_fill_exam_form_wizard,model_student_fill_exam_form_wizard,base.group_user,1,1,1,1
+access_student_result,access_student_result,model_student_management_result,base.group_user,1,1,1,1

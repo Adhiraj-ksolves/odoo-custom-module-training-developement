@@ -14,9 +14,11 @@
             <field name="name">school.management.teacher.list</field>
             <field name="model">school.management.teacher</field>
             <field name="arch" type="xml">
-                <list>
+                <list decoration-danger="gender == 'female'" decoration-info="gender == 'male'">
                     <field name="name"/>
                     <field name="subject_ids" widget="many2many_tags"/>
+                    <field name="male_count"/>
+                    <field name="female_count"/>
                     <field name="phone_no"/>
                     <field name="age"/>
                     <field name="gender"/>
@@ -32,6 +34,8 @@
                 <kanban>
                     <field name="name"/>
                     <field name="subject_ids"/>
+                    <field name="male_count"/>
+                    <field name="female_count"/>
                     <field name="phone_no"/>
                     <field name="age"/>
                     <field name="gender"/>
@@ -40,23 +44,38 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_kanban_record">
-                                <strong>Name:</strong>
-                                <field name="name"/>
-                                <br/>
-                                <strong>Subject:</strong>
-                                <field name="subject_ids"/>
-                                <br/>
-                                <strong>Phone No:</strong>
-                                <field name="phone_no"/>
-                                <br/>
-                                <strong>Age:</strong>
-                                <field name="age"/>
-                                <br/>
-                                <strong>Gender:</strong>
-                                <field name="gender"/>
-                                <br/>
-                                <strong>No. of Students:</strong>
-                                <field name="student_ids"/>
+                                <span>
+                                    <strong>Name:</strong>
+                                    <field name="name"/>
+                                </span>
+                                <span>
+                                    <strong>Subject:</strong>
+                                    <field name="subject_ids"/>
+                                </span>
+                                <span>
+                                    <strong>Phone No:</strong>
+                                    <field name="phone_no"/>
+                                </span>
+                                <span>
+                                    <strong>Age:</strong>
+                                    <field name="age"/>
+                                </span>
+                                <span>
+                                    <strong>Gender:</strong>
+                                    <field name="gender"/>
+                                </span>
+                                <span>
+                                    <strong>Male Count:</strong>
+                                    <field name="male_count"/>
+                                </span>
+                                <span>
+                                    <strong>Female Count:</strong>
+                                    <field name="female_count"/>
+                                </span>
+                                <span>
+                                    <strong>No. of Students:</strong>
+                                    <field name="student_ids"/>
+                                </span>
                             </div>
                         </t>
                     </templates>
